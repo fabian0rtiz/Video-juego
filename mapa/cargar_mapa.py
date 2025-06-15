@@ -36,13 +36,25 @@ class YGrupoCmara(pygame.sprite.Group):
         self.offset = pygame.math.Vector2()#indica la posicion inicial en ejes x y dos dimensiones cuando esta vacio va a estar en el centro del jugador 0,0
 
     def dibuja(self,jugador):
-        self.offset.x=jugador.rect.centerx- self.half_width#con esto centramos en el eje x el vector en el personaje
-        self.offset.y=jugador.rect.centery- self.half_height#con esto centramos en el eje y el vector en el personaje
+        self.offset.x = jugador.rect.centerx - self.half_width
+        self.offset.y = jugador.rect.centery - self.half_height
 
-        for sprite in sorted(self.sprites(),key=lambda sprite:sprite.rect.centery):#accedemos a todos lo sprites del grupo , lambda es una funciono anonima, se usa para el codigo innesario 
-            offset_rect=sprite.rect.topleft - self.offset#esto sera in rectangulo invisible donde se usara para el movimiento de la camara
-            self.screen.blit(sprite.image, offset_rect)#la primera dibuja , la segunda indica las posiciones
-    
+        lista_sprites = list(self.sprites())
+
+        for i in range(len(lista_sprites)):
+            for j in range(i + 1, len(lista_sprites)):
+                if lista_sprites[i].rect.centery > lista_sprites[j].rect.centery:
+                    lista_sprites[i], lista_sprites[j] = lista_sprites[j], lista_sprites[i]
+        
+        for sprite in lista_sprites:
+            pos_en_pantalla = sprite.rect.topleft - self.offset
+            self.screen.blit(sprite.image, pos_en_pantalla)
+
+
+
+
+
+        
     
 
 
