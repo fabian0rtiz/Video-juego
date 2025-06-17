@@ -5,7 +5,7 @@ class Jugador(pygame.sprite.Sprite):
     def __init__(self,pos,groups,obstaculos):
         super().__init__(groups)
 
-        self.image =pygame.image.load("image9x3.png")
+        self.image =pygame.image.load("imagenes/image9x3.png")
         self.rect =self.image.get_rect(topleft=pos)
         self.hitbox= self.rect.inflate(0,-20)
         
