@@ -49,12 +49,15 @@ class YGrupoCmara(pygame.sprite.Group):
         for sprite in lista_sprites:
             pos_en_pantalla = sprite.rect.topleft - self.offset
             self.screen.blit(sprite.image, pos_en_pantalla)
+<<<<<<< HEAD
 
 
 
 
 
         
+=======
+>>>>>>> 33e9d3c971bd22096deb3a90e7f274940f85f44a
     
 
 
