@@ -1,6 +1,7 @@
 import sys
 import pygame  
 from cargar_mapa import Nivel 
+from tiempo import Tiempo
 
 class Zelda:
     def __init__(self):
@@ -8,6 +9,8 @@ class Zelda:
         self.screen = pygame.display.set_mode((1100, 550))
         pygame.display.set_caption("calaboso")  
         self.nivel=Nivel()
+        self.cronometro = Tiempo(60)
+        self.reloj = pygame.time.Clock()
 
     def corre_juego(self): 
         while True:
@@ -17,7 +20,16 @@ class Zelda:
                
             self.screen.fill("black")
             self.nivel.corre()
-            pygame.display.update()  
+            self.cronometro.actualizar()
+            self.cronometro.dibujar(self.screen)
+
+            if self.cronometro.agotado():
+                print("¡Tiempo agotado!")
+                sys.exit()
+            pygame.display.update()
+            self.reloj.tick(60)  
+
+            
 
 if __name__ == "__main__":
     zelda_juego = Zelda()
