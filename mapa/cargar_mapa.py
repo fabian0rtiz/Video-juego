@@ -42,13 +42,13 @@ class YGrupoCmara(pygame.sprite.Group):
         lista_sprites = list(self.sprites())
 
         for i in range(len(lista_sprites)):
-            for j in range(i + 1, len(lista_sprites)):
-                if lista_sprites[i].rect.centery > lista_sprites[j].rect.centery:
+            for j in range(i + 1, len(lista_sprites)):#el i +1 es para q no se compare consigo mismo sino se quedaria estatico
+                if lista_sprites[i].rect.centery > lista_sprites[j].rect.centery: #este condicional nos ayuda a comparar las posiciones de nuestra lista de sprites donde al momento de tener que recorrer una mas arriba hay q actualizar la posicion central con la dubla
                     lista_sprites[i], lista_sprites[j] = lista_sprites[j], lista_sprites[i]
         
         for sprite in lista_sprites:
-            pos_en_pantalla = sprite.rect.topleft - self.offset
-            self.screen.blit(sprite.image, pos_en_pantalla)
+            pos_en_pantalla = sprite.rect.topleft - self.offset #lo restamos con la posicion real y con el cuadro del vector para tener la perspectiva
+            self.screen.blit(sprite.image, pos_en_pantalla)#esto dibuja el sprite y la posicion ajustada
   
 
 
