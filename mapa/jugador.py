@@ -10,7 +10,7 @@ class Jugador(pygame.sprite.Sprite):
         self.hitbox= self.rect.inflate(0,-20)
         
         self.direccion =pygame.math.Vector2() #vector 2 es para tener eje x y 
-        self.velocidad=1
+        self.velocidad=10
 
         self.Obstaculos=obstaculos
     

@@ -2,12 +2,16 @@ import pygame
 import matriz_mapa
 from tiles_mapa import Tile
 from jugador import Jugador
+from meta import Meta
 
 class Nivel:
     def __init__(self):
         self.screen= pygame.display.get_surface()
         self.Sprites_deFondo= YGrupoCmara()
         self.Obstaculos = pygame.sprite.Group()
+        self.Metas = pygame.sprite.Group()
+        self.ganaste=False
+
 
         self.crearMapa()
         
@@ -19,6 +23,10 @@ class Nivel:
                 y=row_index*104
                 if col=="x":
                     Tile((x,y),[self.Sprites_deFondo,self.Obstaculos])
+
+                if col=="M":
+                    Meta((x,y),[self.Sprites_deFondo,self.Metas])
+        
                 if col=="L":
                     self.jugador=Jugador((x,y),[self.Sprites_deFondo],self.Obstaculos)
 
@@ -26,7 +34,15 @@ class Nivel:
     def corre(self):
         self.Sprites_deFondo.dibuja(self.jugador)
         self.Sprites_deFondo.update()
-    
+
+        if not self.ganaste and pygame.sprite.spritecollideany(self.jugador, self.Metas):
+          self.ganaste = True
+        if self.ganaste:
+         fuente = pygame.font.Font(None, 80)
+         texto = fuente.render("¡Has ganado!", True, "white")
+         rect_texto = texto.get_rect(center=(self.screen.get_width()//2, self.screen.get_height()//2))
+         self.screen.blit(texto, rect_texto)
+         
 class YGrupoCmara(pygame.sprite.Group):
     def __init__(self):
         super().__init__()
