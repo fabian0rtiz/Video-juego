@@ -3,10 +3,10 @@ import time
 
 class Tiempo:
     def __init__(self, tiempo_limite):
-        self.tiempo_limite = tiempo_limite
-        self.tiempo_actual = tiempo_limite
-        self.ultimo_tiempo = time.time()
-        self.font = pygame.font.Font(None, 36)
+        self.tiempo_limite = tiempo_limite #el tiempo total
+        self.tiempo_actual = tiempo_limite #el tiempo q ira disminuyendo
+        self.ultimo_tiempo = time.time() #nos da la hora actual , se usara para hacer las comparaciones
+        self.font = pygame.font.Font(None, 36)#fuennte de texto(tipo de texto,tamaño)
 
     def actualizar(self):
         tiempo_actual = time.time()

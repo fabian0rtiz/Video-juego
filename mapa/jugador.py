@@ -54,8 +54,8 @@ class Jugador(pygame.sprite.Sprite):
             self.direccion.x = 0
 
     def mover(self, velocidad):
-        if self.direccion.magnitude() != 0:
-            self.direccion = self.direccion.normalize()
+        if self.direccion.magnitude() != 0: #verificamos la magnitud de nuestros vectores para q no sea nulo
+            self.direccion = self.direccion.normalize() #comprobamos la normal de los vectores esto hace q el vector en diagonal no sea mas rapido
 
         self.hitbox.x += self.direccion.x * velocidad
         self.colisiones("horizontal")
@@ -79,12 +79,12 @@ class Jugador(pygame.sprite.Sprite):
 
     def animar(self):
         # Avanza el frame solo si el jugador se mueve
-        if self.direccion.magnitude() != 0:
-            self.frame_index += self.animacion_velocidad
-            if self.frame_index >= len(self.frames_arriba):  # todas tienen el mismo largo
+        if self.direccion.magnitude() != 0:# verifica su movimiento
+            self.frame_index += self.animacion_velocidad #aumenta el indice de la imagen
+            if self.frame_index >= len(self.frames_arriba):  # reiniciamos el ciclo
                 self.frame_index = 0
 
-            frame = int(self.frame_index)
+            frame = int(self.frame_index) #lo convertimos a entero ya q se suele poner el decimales
             if self.direccion_actual == "arriba":
                 self.image = self.frames_arriba[frame]
             elif self.direccion_actual == "abajo":

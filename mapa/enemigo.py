@@ -31,14 +31,14 @@ class Enemigo(pygame.sprite.Sprite):
 
 
     def actualizar_animacion(self):
-        self.index_animacion += 0.1
-        if self.index_animacion >= len(self.animacion_derecha):
+        self.index_animacion += 0.1 #para q avance fotograma por fotograma#
+        if self.index_animacion >= len(self.animacion_derecha): #bucle de la imagenes
             self.index_animacion = 0
 
         if self.direccion == 1:
-            self.image = self.animacion_derecha[int(self.index_animacion)]
+            self.image = self.animacion_derecha[int(self.index_animacion)] #elije la direccion
         else:
-            self.image = self.animacion_izquierda[int(self.index_animacion)]
+            self.image = self.animacion_izquierda[int(self.index_animacion)]#elije la direccion
 
     def colisiona_obstaculo(self):
         for obstaculo in self.obstaculos:

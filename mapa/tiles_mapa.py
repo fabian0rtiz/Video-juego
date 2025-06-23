@@ -6,7 +6,7 @@ class Tile_1(pygame.sprite.Sprite):
         super().__init__(groups)
 
         self.image =pygame.image.load("imagenes/mapa/pared_derecha.png")
-        self.rect =self.image.get_rect(topleft=pos)
+        self.rect =self.image.get_rect(topleft=pos) #en la esquina superior  izquierda
 
         self.hitbox =self.rect .inflate(0, -10)
 class Tile_2(pygame.sprite.Sprite):

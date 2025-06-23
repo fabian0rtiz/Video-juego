@@ -78,12 +78,7 @@ class Nivel:
 
         if not self.ganaste and pygame.sprite.spritecollideany(self.jugador, self.Metas):
           self.ganaste = True
-        if self.ganaste:
-         fuente = pygame.font.Font(None, 80)
-         texto = fuente.render("¡Has ganado!", True, "white")
-         rect_texto = texto.get_rect(center=(self.screen.get_width()//2, self.screen.get_height()//2))
-         self.screen.blit(texto, rect_texto)
-         self.Enemigos.update()
+        
          
 class YGrupoCmara(pygame.sprite.Group):
     def __init__(self):
