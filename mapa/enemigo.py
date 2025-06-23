@@ -28,6 +28,12 @@ class Enemigo(pygame.sprite.Sprite):
     def update(self):
         self.mover()
 
+<<<<<<< HEAD
 
 
 
+=======
+        # Colisión con jugador
+        if self.jugador.rect.colliderect(self.rect):
+            self.jugador.morir()  
+>>>>>>> 450e04866abdb37c1dde1cd752562153676ca3aa
