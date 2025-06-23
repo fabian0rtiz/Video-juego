@@ -20,6 +20,22 @@ class Nivel:
         
 
     def crearMapa(self):
+        for row_index, row in enumerate(matriz_mapa.mapa):
+            for col_index, col in enumerate(row):
+                x = col_index * 96
+                y = row_index * 96
+                if col == "L":
+                    self.jugador = Jugador((x, y), [self.Sprites_deFondo], self.Obstaculos)
+
+        for row_index, row in enumerate(matriz_mapa.mapa):
+            for col_index, col in enumerate(row):
+                x = col_index * 96
+                y = row_index * 96
+                if col == "E":
+                    Enemigo((x, y), [self.Sprites_deFondo, self.Enemigos], self.Obstaculos)
+        
+        
+
         for row_index,row in enumerate(matriz_mapa.mapa):
             for col_index,col in enumerate(row):
                 x=col_index*96
@@ -48,16 +64,15 @@ class Nivel:
                 if col=="M":
                     Meta((x,y),[self.Sprites_deFondo,self.Metas])
         
-                if col=="L":
-                    
-                    self.jugador=Jugador((x,y),[self.Sprites_deFondo],self.Obstaculos)
-                if col == "E":
-                 Enemigo((x, y), [self.Sprites_deFondo, self.Enemigos], self.Obstaculos, self.jugador)
+                
+             
 
     
     def corre(self):
         self.Sprites_deFondo.dibuja(self.jugador)
         self.Sprites_deFondo.update()
+        self.Enemigos.update()
+        
 
         if not self.ganaste and pygame.sprite.spritecollideany(self.jugador, self.Metas):
           self.ganaste = True

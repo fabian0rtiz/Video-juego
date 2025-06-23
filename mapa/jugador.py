@@ -1,5 +1,6 @@
 import pygame
 import os
+import sys
 
 class Jugador(pygame.sprite.Sprite):
     def __init__(self, pos, groups, obstaculos):
@@ -94,6 +95,10 @@ class Jugador(pygame.sprite.Sprite):
                 self.image = self.frames_derecha[frame]
         else:
             self.frame_index = 0  # volver al primer frame cuando se detiene
+
+    
+
+
 
     def update(self):
         self.teclado()
