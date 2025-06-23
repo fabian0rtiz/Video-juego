@@ -16,10 +16,10 @@ class Jugador(pygame.sprite.Sprite):
         self.Obstaculos = obstaculos
 
         
-        self.frames_arriba = self.cargar_animaciones("personaje/caminar_arriba")
-        self.frames_abajo = self.cargar_animaciones("personaje/caminar_abajo")
-        self.frames_izquierda = self.cargar_animaciones("personaje/caminar_izquierda")
-        self.frames_derecha = self.cargar_animaciones("personaje/caminar_derecha")
+        self.frames_arriba = self.cargar_animaciones("imagenes/personaje/caminar_arriba")
+        self.frames_abajo = self.cargar_animaciones("imagenes/personaje/caminar_abajo")
+        self.frames_izquierda = self.cargar_animaciones("imagenes/personaje/caminar_izquierda")
+        self.frames_derecha = self.cargar_animaciones("imagenes/personaje/caminar_derecha")
 
         self.frame_index = 0
         self.animacion_velocidad = 0.15

@@ -6,8 +6,8 @@ class Enemigo(pygame.sprite.Sprite):
     def __init__(self, pos, groups, obstaculos, jugador):
         super().__init__(groups)
 
-        self.animacion_derecha = self.cargar_animacion("enemigo/caminar_derecha")
-        self.animacion_izquierda = self.cargar_animacion("enemigo/caminar_izquierda")
+        self.animacion_derecha = self.cargar_animacion("imagenes/enemigo/caminar_derecha")
+        self.animacion_izquierda = self.cargar_animacion("imagenes/enemigo/caminar_izquierda")
 
         self.index_animacion = 0
         self.direccion = 1  # 1 para derecha, -1 para izquierda
