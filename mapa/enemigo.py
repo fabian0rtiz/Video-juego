@@ -51,4 +51,4 @@ class Enemigo(pygame.sprite.Sprite):
 
         # Colisión con jugador
         if self.jugador.rect.colliderect(self.rect):
-            self.jugador.morir()  # Deberás implementar esto en el jugador
+            self.jugador.morir()  
