@@ -1,39 +1,73 @@
 import pygame
+import os
+import sys
 
 class Enemigo(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, obstaculos):
+    def __init__(self, pos, groups, obstaculos, jugador):
         super().__init__(groups)
 
-        self.image = pygame.image.load("imagenes/enemigo.png")
+        self.animacion_derecha = self.cargar_animacion("enemigo/caminar_derecha")
+        self.animacion_izquierda = self.cargar_animacion("enemigo/caminar_izquierda")
+
+        self.index_animacion = 0
+        self.direccion = 1  # 1 para derecha, -1 para izquierda
+
+        self.image = self.animacion_derecha[0]
         self.rect = self.image.get_rect(topleft=pos)
         self.hitbox = self.rect.inflate(-40, -40)
 
-        self.direccion = pygame.math.Vector2(1, 0)  # Comienza moviéndose a la derecha
         self.velocidad = 2
         self.obstaculos = obstaculos
+        self.jugador = jugador
 
-    def mover(self):
-        self.hitbox.x += self.direccion.x * self.velocidad
+    def cargar_animacion(self, carpeta):
+     imagenes = []
+     for archivo in sorted(os.listdir(carpeta)):
+        if archivo.endswith(".png"):
+            ruta = os.path.join(carpeta, archivo)
+            imagen = pygame.image.load(ruta).convert_alpha()
+            imagenes.append(imagen)
+     return imagenes
 
+
+    def actualizar_animacion(self):
+        self.index_animacion += 0.1
+        if self.index_animacion >= len(self.animacion_derecha):
+            self.index_animacion = 0
+
+        if self.direccion == 1:
+            self.image = self.animacion_derecha[int(self.index_animacion)]
+        else:
+            self.image = self.animacion_izquierda[int(self.index_animacion)]
+
+    def colisiona_obstaculo(self):
         for obstaculo in self.obstaculos:
             if obstaculo.rect.colliderect(self.hitbox):
-                # Rebota: invierte la dirección al chocar
-                self.direccion.x *= -1
-                self.hitbox.x += self.direccion.x * self.velocidad
-                break  # Solo necesita rebotar una vez por frame
+                return True
+        return False
 
-        # Actualiza rect para dibujar
-        self.rect.center = self.hitbox.center
+    def colisiona_jugador(self):
+        return self.jugador.rect.colliderect(self.hitbox)
 
     def update(self):
-        self.mover()
+        # Movimiento y rebote
+        self.hitbox.x += self.velocidad * self.direccion
+        if self.colisiona_obstaculo():
+            self.hitbox.x -= self.velocidad * self.direccion
+            self.direccion *= -1
 
-<<<<<<< HEAD
+        # Actualizar rect para dibujar
+        self.rect.center = self.hitbox.center
 
+        # Animación
+        self.actualizar_animacion()
 
-
-=======
         # Colisión con jugador
-        if self.jugador.rect.colliderect(self.rect):
-            self.jugador.morir()  
->>>>>>> 450e04866abdb37c1dde1cd752562153676ca3aa
+        if self.colisiona_jugador():
+            pygame.time.delay(500)
+            print("¡Has perdido!")
+            sys.exit()
+
+
+
+

@@ -32,7 +32,9 @@ class Nivel:
                 x = col_index * 96
                 y = row_index * 96
                 if col == "E":
-                    Enemigo((x, y), [self.Sprites_deFondo, self.Enemigos], self.Obstaculos)
+                 Enemigo((x, y), [self.Sprites_deFondo, self.Enemigos], self.Obstaculos, self.jugador)
+
+
         
         
 
