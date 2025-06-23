@@ -3,6 +3,7 @@ import pygame
 from cargar_mapa import Nivel 
 from tiempo import Tiempo
 
+
 class Zelda:
     def __init__(self):
         pygame.font.init()
@@ -13,9 +14,13 @@ class Zelda:
         self.nivel=Nivel()
         self.cronometro = Tiempo(30)
         self.reloj = pygame.time.Clock()
+        
+        
 
         self.tiempo_ganador = None
         self.tiempo_perdedor = None
+
+     
 
     def corre_juego(self): 
         

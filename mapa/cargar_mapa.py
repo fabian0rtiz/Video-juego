@@ -1,8 +1,9 @@
 import pygame
 import matriz_mapa
-from tiles_mapa import Tile
+from tiles_mapa import *
 from jugador import Jugador
 from meta import Meta
+from enemigo import Enemigo
 
 class Nivel:
     def __init__(self):
@@ -11,6 +12,8 @@ class Nivel:
         self.Obstaculos = pygame.sprite.Group()
         self.Metas = pygame.sprite.Group()
         self.ganaste=False
+        self.Enemigos = pygame.sprite.Group()
+
 
 
         self.crearMapa()
@@ -19,16 +22,37 @@ class Nivel:
     def crearMapa(self):
         for row_index,row in enumerate(matriz_mapa.mapa):
             for col_index,col in enumerate(row):
-                x=col_index*104
-                y=row_index*104
+                x=col_index*96
+                y=row_index*96
+                
                 if col=="x":
-                    Tile((x,y),[self.Sprites_deFondo,self.Obstaculos])
+                    Tile_1((x,y),[self.Sprites_deFondo,self.Obstaculos])
+                if col=="y":
+                    Tile_2((x,y),[self.Sprites_deFondo,self.Obstaculos])
+                if col=="z":
+                    Tile_3((x,y),[self.Sprites_deFondo,self.Obstaculos])
+                if col=="v":
+                    Tile_4((x,y),[self.Sprites_deFondo,self.Obstaculos])
+                if col=="1":
+                    Tile_5((x,y),[self.Sprites_deFondo,self.Obstaculos])
+                if col=="2":
+                    Tile_6((x,y),[self.Sprites_deFondo,self.Obstaculos])
+                if col=="3":
+                    Tile_7((x,y),[self.Sprites_deFondo,self.Obstaculos])
+                if col=="4":
+                    Tile_8((x,y),[self.Sprites_deFondo,self.Obstaculos])
+                if col=="U":
+                    Tile_9((x,y),[self.Sprites_deFondo,self.Obstaculos])
+                
 
                 if col=="M":
                     Meta((x,y),[self.Sprites_deFondo,self.Metas])
         
                 if col=="L":
+                    
                     self.jugador=Jugador((x,y),[self.Sprites_deFondo],self.Obstaculos)
+                if col == "E":
+                 Enemigo((x, y), [self.Sprites_deFondo, self.Enemigos], self.Obstaculos, self.jugador)
 
     
     def corre(self):
@@ -42,6 +66,7 @@ class Nivel:
          texto = fuente.render("¡Has ganado!", True, "white")
          rect_texto = texto.get_rect(center=(self.screen.get_width()//2, self.screen.get_height()//2))
          self.screen.blit(texto, rect_texto)
+         self.Enemigos.update()
          
 class YGrupoCmara(pygame.sprite.Group):
     def __init__(self):
