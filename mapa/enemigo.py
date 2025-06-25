@@ -14,7 +14,7 @@ class Enemigo(pygame.sprite.Sprite):
 
         self.image = self.animacion_derecha[0]
         self.rect = self.image.get_rect(topleft=pos)
-        self.hitbox = self.rect.inflate(-40, -40)
+        self.hitbox = self.rect.inflate(-50, -50)
 
         self.velocidad = 2
         self.obstaculos = obstaculos
